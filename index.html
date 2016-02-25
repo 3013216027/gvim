@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Gvim by 3013216027</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Gvim</h1>
+      <h2 class="project-tagline"></h2>
+      <a href="https://github.com/3013216027/gvim" class="btn">View on GitHub</a>
+      <a href="https://github.com/3013216027/gvim/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/3013216027/gvim/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="jbers-gvim-configuration-profile" class="anchor" href="#jbers-gvim-configuration-profile" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JBer's <a href="https://github.com/3013216027/gvim">gvim</a> configuration profile</h1>
+
+<h2>
+<a id="attantion" class="anchor" href="#attantion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Attantion</h2>
+
+<p>For Unix like/git-bash user, also see my <a href="https://github.com/3013216027/vim">vim configuration profile</a></p>
+
+<hr>
+
+<h1>
+<a id="fast-configuration" class="anchor" href="#fast-configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fast Configuration</h1>
+
+<p>Vim is installed by default most times at most popular linux destributions nowadays, but for PC users, you must install it yourself. You can get more detail or download gvim(gui vim, which has a windows-x86 version) from <a href="http://www.vim.org/download.php#pc">here</a></p>
+
+<ul>
+<li>Don't forget to add the path of gvim.exe to your windows system's PATH, then you can run it from <code>cmd</code> with command <code>gvim</code> directly or just type <code>Win+R</code> and input <code>gvim&lt;Enter&gt;</code>.</li>
+<li>If you don't like cmd, you can use git-bash instead, read <a href="##%20Congirutate%20with%20git">Configurate with git-bash</a> for more information.</li>
+</ul>
+
+<h2>
+<a id="configurate-with-cmdpower-shell" class="anchor" href="#configurate-with-cmdpower-shell" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configurate with cmd/power shell</h2>
+
+<p>If you don't take git installed on your pc, then you can open <code>\_vimrc</code> in this repository on the web browser, then right click the <strong>Raw</strong> button at the right-top corner the file, choose <code>Save As</code> to download it into your gvim install directory(which may be <code>C:/Program Files (x86)/Vim</code> by default) directly, just overwrite the default one or backup it before overwrite.</p>
+
+<p>What's more, use a plugin manager to manage your vim plugins would make your life easier. This configuration use a popular vim plugin manager <a href="https://github.com/VundleVim/Vundle.vim">vundle</a> to manager all plugins. You could visit <a href="https://github.com/VundleVim/Vundle.vim">https://github.com/VundleVim/Vundle.vim</a> to <a href="https://github.com/VundleVim/Vundle.vim/archive/master.zip">download vundle plugin for vim</a>, unzip it and rename the folder to <code>Vundle.vim</code> and copy it into <code>&lt;Your-gvim-install-directory&gt;/vimfiles/plugin/</code>, the configuration file <code>\_vimrc</code> would load it by command <code>set rtp+=./vimfiles/plugin/Vundle.vim</code></p>
+
+<p>If it goes well, we can now get everything done. However, before the final step, you should take a glance at the <code>\_vimrc</code>, comment the plugins that you don't need. Then open gvim and type <code>:PluginInstall</code> to finish the work.</p>
+
+<p>Now, everything is well prepared for you, just enjoy this amazing editor:)</p>
+
+<h2>
+<a id="configurate-with-git-bash" class="anchor" href="#configurate-with-git-bash" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configurate with git-bash</h2>
+
+<p>If you think cmd or power shell is so awful a shell, I would recommand you take a try at <a href="https://git-scm.com/downloads">git-bash</a>. vim is installed itself. Then git-bash can be recognized as something like bash in linux, so you can continue your configuration by my <a href="https://github.com/3013216027/vim">vim</a> profile.</p>
+
+<ul>
+<li>If you do like this way, DO NOT add the path of gvim into the PATH, more specifically, you have no need to install gvim any more.</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/3013216027/gvim">Gvim</a> is maintained by <a href="https://github.com/3013216027">3013216027</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
