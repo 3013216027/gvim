@@ -1,227 +1,284 @@
-" It's a vimrc file from gvim in Windows.
-" Also suitable for Linux
-" Besides, all the files(include the *.vim files have been pushed into
-" 链接: http://pan.baidu.com/s/1ntmkhSl 密码: 175c)
-" Last Edited by JBer
-" 2015/03/16 4:15 p.m.
-"
-set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
+"set compatible
 
-"set diffexpr=MyDiff()
-"function MyDiff()
-"  let opt = '-a --binary '
-"  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-"  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-"  let arg1 = v:fname_in
-"  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-"  let arg2 = v:fname_new
-"  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-"  let arg3 = v:fname_out
-"  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-"  let eq = ''
-"  if $VIMRUNTIME =~ ' '
-"    if &sh =~ '\<cmd'
-"      let cmd = '""' . $VIMRUNTIME . '\diff"'
-"      let eq = '"'
-"    else
-"      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-"    endif
-"  else
-"    let cmd = $VIMRUNTIME . '\diff'
-"  endif
-"  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-"endfunction
-
-"Added by JBer --- 2015/03/10 8:01 p.m.
-" 定义快捷键的前缀，即<Leader>
-let mapleader=";"
-"文件类型侦测。允许基于不同语言加载不同插件（如，C++ 的语法高亮插件与 python 的不同）：
-" 开启文件类型侦测
-filetype on
-" 根据侦测到的不同类型加载对应的插件
-filetype plugin on
-" 快捷键。把 vim（非插件）常用操作设定成快捷键，提升效率：
-" 定义快捷键在结对符之间跳转，助记pair
-nmap <Leader>pa %
-" 其他。搜索、vim 命令补全等设置：
-" 开启实时搜索功能
-set incsearch
-" 搜索时大小写不敏感
-set ignorecase
-" 关闭兼容模式
-set nocompatible
-" vim 自身命令行模式智能补全
-set wildmenu
-" 禁用自动备份
-set nobackup
-
-" 设置配色方案-molokai.vim
+" Vim5 and later versions support syntax highlighting. Uncommenting the next
+" line enables syntax highlighting by default.
 syntax enable
-colorscheme Monokai
+if has("syntax")
+  syntax on
+endif
 
-" 禁止光标闪烁
-set gcr=a:block-blinkon0
+" If using a dark background within the editing area and syntax highlighting
+" turn on this option as well
+set background=dark
 
-" 背景:暗色
-"set bg=dark
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+"if has("autocmd")
+"  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+"endif
 
-"个人设置
-execute pathogen#infect()
+" Uncomment the following to have Vim load indentation rules and plugins
+" according to the detected filetype.
+"if has("autocmd")
+"  filetype plugin indent on
+"endif
 
-filetype on
-set smartindent   "设置智能缩进
-"set shortmess=atI "去掉欢迎界面
-colorscheme monokai          "sublime的配色方案
-set guifont=Consolas:h12      "字体与字号
-set autoindent               " 自动对齐
-set smartindent              " 智能自动缩进
-set ai!                      " 设置自动缩进
-set nu!                      " 显示行号
-set mouse=a                  " 启用鼠标
-set ruler                    " 右下角显示光标位置的状态行
-set incsearch                " 查找book时，当输入/b时会自动找到
-set hlsearch                 " 开启高亮显示结果
-set incsearch                " 开启实时搜索功能
-" set nowrapscan               " 搜索到文件两端时不重新搜索
-set nocompatible             " 关闭兼容模式
-set vb t_vb=                 " 关闭提示音
-au GuiEnter * set t_vb=     " 禁用屏幕闪烁（多余命令屏幕均会闪烁）
-" set hidden                   " 允许在有未保存的修改时切换缓冲区
-" set list                     " 显示Tab符，使用一高亮竖线代替
-" set listchars=tab:\|\ ,
-syntax enable                " 打开语法高亮
-syntax on                    " 开启文件类型侦测
-filetype indent on           " 针对不同的文件类型采用不同的缩进格式
-filetype plugin on           " 针对不同的文件类型加载对应的插件
-filetype plugin indent on    " 启用自动补全
-
-"gvim 版本为7.4.*
-set encoding=utf-8
+" The following are commented out as they cause vim to behave a lot
+" differently from regular Vi. They are highly recommended though.
+"set showcmd		" Show (partial) command in status line.
+"set showmatch		" Show matching brackets.
+"set ignorecase		" Do case insensitive matching
+"set smartcase		" Do smart case matching
+"set incsearch		" Incremental search
+set autowrite		" Automatically save before commands like :next and :make
+"set hidden		" Hide buffers when they are abandoned
+set mouse=a		" Enable mouse usage (all modes)
+"set guifont=Consolas:h12 " font type and size
+set vb t_vb= "disable sound
+"set list "replace tab character with '|'
+"set listchars=tab:\|\
 set fileencodings=utf-8,gbk,gb18030,gb2312
-"解决菜单乱码
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-"解决consle输出乱码
-language messages zh_CN.utf-8
-"设置<F5>为快速编译运行C艹文件
-"Linux下请修改相关命令
-"定义CompileRun函数，用来调用进行编译和运行
-func CompileRun()
-exec "w"
-"C程序
-if &filetype == 'c'
-exec "!gcc -Wl,-enable-auto-import % -g -o %<.exe"
-"c++程序
-elseif &filetype == 'cpp'
-exec "!g++ -Wl,-enable-auto-import % -g -o %<.exe"
-"Java程序
-elseif &filetype == 'java'
-exec "!javac %"
-endif
-call Run()
-endfunc
-"结束定义CompileRun
-"定义Run函数
-func Run()
-if &filetype == 'c' || &filetype == 'cpp'
-exec "!%<.exe"
-elseif &filetype == 'java'
-exec "!java %<"
-endif
-endfunc
-"定义Debug函数，用来调试程序
-func Debug()
-exec "w"
-"C程序
-if &filetype == 'c'
-exec "!gcc % -g -o %<.exe"
-exec "!gdb %<.exe"
-elseif &filetype == 'cpp'
-exec "!g++ % -g -o %<.exe"
-exec "!gdb %<.exe"
-"Java程序
-elseif &filetype == 'java'
-exec "!javac %"
-exec "!jdb %<"
-endif
-endfunc
-"结束定义Debug
-"设置程序的运行和调试的快捷键F5和Ctrl-F5
-map <F5> :call CompileRun()<CR>
-map <F6> :call Run()<CR>
-map <C-F5> :call Debug()<CR>
-"endfunc
-"根据文件类型缩进,添加了:
-"javascript[for node.js], python
-if has("autocmd")
-	autocmd FileType javascript,html,xhtml,css,xml,vim setlocal ts=2 sts=2 sw=2 expandtab
-  autocmd FileType python,py setlocal ts=2 sts=2 sw=2 expandtab
-endif
 
-"设置tab字符和回车字符
+
+"===================cmd下中文乱码=============
+set fileencodings=utf-8,gbk,cp936,ucs-bom,gb2312
+source $VIMRUNTIME/delmenu.vim "remove menu
+source $VIMRUNTIME/menu.vim "add new menu
+language messages gb2312 "message bar
+"=============================================
+
+
+"~~~~~~~~~~~~~~~~~~~~something I like~~~~~~~~~~~~~~~~~~~~~~
+"tabshift
+set ts=4
+"禁止闪烁
+set gcr=a:block-blinkon0
+"gnome terminal should go with:
+" gsettings set org.gnome.desktop.interface cursor-blink false
+"show line numbers
+set nu
+"c language indext style
+set cindent
+"auto remove .swp file(s) when exit vi
+set nobackup
+"number of color
+set t_Co=256
+"status line, plz comment it if your screen is TOO SMALL...
+set laststatus=2
+"show indent as different sympol
 "set list
-"set listchars=tab:>\ ,eol:+
+"set listchars=tab:▸\ ,eol:¬
+"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+
+
+"-------------------------------------------Bundle Start-------------------------------------"
+"git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"Command:
+" :PluginList
+" :PluginInstall
+" :PluginSearch foo
+" :PluginClean => 删除插件首先要在.vimrc中注释掉插件相应的行，再运行该命令  
+set nocompatible                " be iMproved
+filetype off                    " required!
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+"Let Vundle manage Vundle, required.
+Plugin 'VundleVim/Vundle.vim'
+
+"-------------Other scripts managed by vundle--------------"
+"Sample:
+"Plugin 'VundleVim/Vundle.vim'
+"Plugin 'tpope/vim-fugitive' => github.com/tpope/...
+"Plugin 'L9' => from http://vim-scripts.org/vim/scripts.html
+"Plugin 'git://git.wincent.com/commend-t.git'
+"Plugin 'file:///home/dong/some-plugin'
+"Plugin 'user/L9', {'name': 'newL9'}
+
+" No.1
+Plugin 'lsdr/monokai' "monokai syntax color
+" No.2
+Plugin 'Soares/rainbow.vim' "provide rainbow colors for your vim...
+
+" No.3
+" powerline 状态栏
+"Plugin 'Lokaltog/vim-powerline'
+"let g:Powerline_symbols = 'fancy'
+"let Powerline_symbols = 'compatible'
+
+" No.4
+"optimize status line
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+" No.5
+"彩虹括号增强版
+Plugin 'kien/rainbow_parentheses.vim'
+let g:rainbow_active = 1
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+"au VimEnter * RainbowParenthesesToggle
+"au Syntax * RainbowParenthesesLoadRound
+"au Syntax * RainbowParenthesesLoadSquare
+"au Syntax * RainbowParenthesesLoadBraces
+
+" No.6
+Plugin 'scrooloose/nerdtree' "目录树导航 安装后可用Ctrl-t快捷键打开(见下文的按键映射C-t)
+autocmd QuickFixCmdPost [^l]* nested cwindow "for nerdtree
+autocmd QuickFixCmdPost    l* nested lwindow "also for nerdtree
+" open nerdtree default if no file is appointed to vim when startup
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"open nerdtree when startup
+"autocmd vimenter * NERDTree 
+"map `Ctrl-t` to open/close nerdtree quickly
+map <C-t> :NERDTreeToggle<CR>
+"close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"change default arrows
+"let g:NERDTreeDirArrowExpandable = '>'
+"let g:NERDTreeDirArrowCollapsible = 'v'
+
+" No.7
+"Plugin 'jiangmiao/auto-pairs' "括号补齐
+" No.8
+"Plugin 'Raimondi/delimitMate' "括号补齐
+
+" No.9
+"Plugin 'Valloric/YouCompleteme'
+" No.10
+"Plugin 'scrooloose/syntastic' "自动语法检查
+
+" No.11
+Plugin 'hynek/vim-python-pep8-indent' "for python indext
+
+" NO.12
+"javascript syntax and indent
+"Plugin 'pangloss/vim-javascript'
+"let g:javascript_conceal_function   = "ƒ"
+"let g:javascript_conceal_null       = "ø"
+"let g:javascript_conceal_this       = "@"
+"let g:javascript_conceal_return     = "⇚"
+"let g:javascript_conceal_undefined  = "¿"
+"let g:javascript_conceal_NaN        = "ℕ"
+"let g:javascript_conceal_prototype  = "¶"
+"let g:javascript_conceal_static     = "•"
+"let g:javascript_conceal_super      = "Ω"
+call vundle#end()
+filetype plugin indent on
+"------------------------------------Bundle End-------------------------------------------------
+
+
+
+
+"============================ quick command for compile and run ===============================
+"F2 编译
+"map<f2> :!g++ % -o %< -o2 -Wall<cr>
+" Save & Make
+" nnoremap <F5> :w<CR>:make %< CC=gcc CFLAGS="-Wall -g -O2"<CR>
+nnoremap <F6> :w<CR>:make %< CC=g++ CFLAGS="-Wall -g -O2 -std=c++11"<CR>:!time ./%< < %<.in<CR>
+" nnoremap <F7> :copen<CR>
+"===============================================================================================
+
+
+
+
+"---------------------------------------make file header fastly(with `Fx`)------------------------
+"====F2==== .c .cpp .php .java(anything with /* */ style comment)
 map <F2> :call SetTitle()<CR>
-map <C-F2> :call SetTitle2()<CR>
 func SetTitle()
 	let l = 0
 	let l = l + 1 | call setline(l,'/* **********************************************')
 	let l = l + 1 | call setline(l,'')
-	let l = l + 1 | call setline(l,'    File Name: '.expand(bufname('%')))
-	"let l = l + 1 | call setline(l,'    File Name: '.expand('%'))
+	let l = l + 1 | call setline(l,'  File Name: '.expand('%'))
 	let l = l + 1 | call setline(l,'')
-	let l = l + 1 | call setline(l,'    Author: zhengdongjian@tju.edu.cn')
+	let l = l + 1 | call setline(l,'  Author: zhengdongjian@tju.edu.cn')
 	let l = l + 1 | call setline(l,'')
-	let l = l + 1 | call setline(l,'    Created Time: '.strftime('%c'))
+	let l = l + 1 | call setline(l,'  Created Time: '.strftime('%c'))
+	let l = l + 1 | call setline(l,'')
+	let l = l + 1 | call setline(l,'*********************************************** */')
+	let l = l + 1 | call setline(l,'')
+endfunc
+"==========
+
+"====F3==== .cpp(.cc)
+map <F3> :call SetTitleCpp()<CR>
+func SetTitleCpp()
+	let l = 0
+	let l = l + 1 | call setline(l,'/* **********************************************')
+	let l = l + 1 | call setline(l,'')
+	let l = l + 1 | call setline(l,'  File Name: '.expand('%'))
+	let l = l + 1 | call setline(l,'')
+	let l = l + 1 | call setline(l,'  Author: zhengdongjian@tju.edu.cn')
+	let l = l + 1 | call setline(l,'')
+	let l = l + 1 | call setline(l,'  Created Time: '.strftime('%c'))
 	let l = l + 1 | call setline(l,'')
 	let l = l + 1 | call setline(l,'*********************************************** */')
 	let l = l + 1 | call setline(l, '#include <bits/stdc++.h>')
 	let l = l + 1 | call setline(l, 'using namespace std;')
 	let l = l + 1 | call setline(l, '')
-	let l = l + 1 | call setline(l, 'typedef long long ll;')
-	let l = l + 1 | call setline(l, 'typedef pair<int, int> P;')
 endfunc
-func SetTitle2()
-	let l = 0
-	let l = l + 1 | call setline(l,'/* **********************************************')
-	let l = l + 1 | call setline(l,'')
-	let l = l + 1 | call setline(l,'    File Name: '.expand(bufname('%')))
-	"let l = l + 1 | call setline(l,'    File Name: '.expand('%'))
-	let l = l + 1 | call setline(l,'')
-	let l = l + 1 | call setline(l,'    Author: zhengdongjian@tju.edu.cn')
-	let l = l + 1 | call setline(l,'')
-	let l = l + 1 | call setline(l,'    Created Time: '.strftime('%c'))
-	let l = l + 1 | call setline(l,'')
-	let l = l + 1 | call setline(l,'*********************************************** */')
-	let l = l + 1 | call setline(l, '#include <map>')
-	let l = l + 1 | call setline(l, '#include <set>')
-	let l = l + 1 | call setline(l, '#include <list>')
-	let l = l + 1 | call setline(l, '#include <cmath>')
-	let l = l + 1 | call setline(l, '#include <ctime>')
-	let l = l + 1 | call setline(l, '#include <deque>')
-	let l = l + 1 | call setline(l, '#include <queue>')
-	let l = l + 1 | call setline(l, '#include <stack>')
-	let l = l + 1 | call setline(l, '#include <bitset>')
-	let l = l + 1 | call setline(l, '#include <cstdio>')
-	let l = l + 1 | call setline(l, '#include <string>')
-	let l = l + 1 | call setline(l, '#include <vector>')
-	let l = l + 1 | call setline(l, '#include <climits>')
-	let l = l + 1 | call setline(l, '#include <complex>')
-	let l = l + 1 | call setline(l, '#include <cstdlib>')
-	let l = l + 1 | call setline(l, '#include <cstring>')
-	let l = l + 1 | call setline(l, '#include <fstream>')
-	let l = l + 1 | call setline(l, '#include <sstream>')
-	let l = l + 1 | call setline(l, '#include <utility>')
-	let l = l + 1 | call setline(l, '#include <iostream>')
-	let l = l + 1 | call setline(l, '#include <algorithm>')
-	let l = l + 1 | call setline(l, '#include <functional>')
-	let l = l + 1 | call setline(l, 'using namespace std;')
-	let l = l + 1 | call setline(l, '')
-	let l = l + 1 | call setline(l, 'typedef long long ll;')
-	let l = l + 1 | call setline(l, 'typedef pair<int, int> P;')
-endfunc
+"==========
 
+"====F4==== .sh
+map <F4> :call SetTitleSh()<CR>
+func SetTitleSh()
+	let l = 0
+	let l = l + 1 | call setline(l,'#!/bin/bash')
+	let l = l + 1 | call setline(l,'#################################################')
+	let l = l + 1 | call setline(l,'#  File Name: '.expand('%'))
+	let l = l + 1 | call setline(l,'#  ')
+	let l = l + 1 | call setline(l,'#  Author: zhengdongjian@tju.edu.cn')
+	let l = l + 1 | call setline(l,'#  ')
+	let l = l + 1 | call setline(l,'#  Created Time: '.strftime('%c'))
+	let l = l + 1 | call setline(l,'#  ')
+	let l = l + 1 | call setline(l,'#################################################')
+	let l = l + 1 | call setline(l,'')
+endfunc
+"==========
+
+"====F5==== .py
+map <F5> :call SetTitlePy()<CR>
+func SetTitlePy()
+	let l = 0
+	let l = l + 1 | call setline(l, '# -*- coding:utf-8 -*-')
+	let l = l + 1 | call setline(l, '# Author: zhengdongjian@tju.edu.cn')
+	let l = l + 1 | call setline(l, '# Create Time: '.strftime('%c'))
+	let l = l + 1 | call setline(l, '')
+	let l = l + 1 | call setline(l, 'import sys')
+	let l = l + 1 | call setline(l, 'reload(sys)')
+	let l = l + 1 | call setline(l, "sys.setdefaultencoding('utf-8')")
+	let l = l + 1 | call setline(l, '')
+endfunc
+"==========
+
+".js .py .json .html .php .jade
+if has("autocmd")
+	augroup filetypedetect
+	au Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
+	au Filetype python setlocal ts=4 sts=4 sw=4 expandtab
+	au Filetype json setlocal ts=2 sts=2 sw=2 expandtab
+	au Filetype html setlocal ts=2 sts=2 sw=2 expandtab
+	au Filetype php setlocal ts=4 sts=4 sw=4 expandtab
+	au BufNewFile,BufRead *.jade setlocal ts=2 sts=2 sw=2 expandtab
+	augroup END
+endif
