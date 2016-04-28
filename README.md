@@ -1,3 +1,9 @@
+====
+
+**Info:** As I had started using [git-bash](https://git-scm.com/downloads) long before, this repository is never useful and would NEVER be updated any more. Also, I have migirated to [babun](http://babun.github.io/) now, it is based on [Cygwin](https://www.cygwin.com/) and is easily use and include some popular software like `vim`, so refer to [vim profile](https://github.com/3013216027/vim) from now on :smile:
+
+====
+
 # JBer's [gvim](https://github.com/3013216027/gvim) configuration profile
 ## Attantion
 For Unix like/git-bash user, also see my [vim configuration profile](https://github.com/3013216027/vim)
